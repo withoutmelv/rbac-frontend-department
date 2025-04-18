@@ -10,7 +10,7 @@
   },
   "main": "main.cjs",
   "devDependencies": {
-    "art-template": "4.13.2",
+    "art-template": "4.13.4",
     "config": "^3.3.12",
     "request": "2.88.2",
     "yargs": "^17.7.2"

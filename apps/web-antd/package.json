@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@iconify/json": "^2.2.282",
+    "@iconify/json": "^2.2.329",
     "@vben/access": "workspace:*",
     "@vben/common-ui": "workspace:*",
     "@vben/constants": "workspace:*",
