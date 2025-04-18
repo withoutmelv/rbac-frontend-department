@@ -11,19 +11,19 @@
       <div class="card-container">
         <div class="card-item" @click="handleCardClick('chat')">
           <img :src="chatIcon" alt="对话" />
-          <div class="model-tag">GPT-4</div>
+          <div class="model-tag">deepseek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">对话</div>
         </div>
         <div class="card-item" @click="handleCardClick('rewrite')">
           <img :src="rewriteIcon" alt="仿写" />
-          <div class="model-tag">GPT-4</div>
+          <div class="model-tag">deepseek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">仿写</div>
         </div>
         <div class="card-item" @click="handleCardClick('meeting')">
           <img :src="meetingIcon" alt="会议纪要" />
-          <div class="model-tag">GPT-4</div>
+          <div class="model-tag">deepseek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">会议纪要</div>
         </div>
@@ -208,7 +208,7 @@ const selectLibrary = (library: any) => {
 .home-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 80vh;
 }
 
 .banner-container {
