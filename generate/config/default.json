@@ -1,0 +1,44 @@
+{
+  "apiUrl": "https://flow.mldong.com/api/dev/schema/getByTableName",
+  "theme": "antd",
+  "appId": "admin",
+  "appSecret": "123456",
+  "templates": [
+    {
+      "name": "接口模板",
+      "selected": true,
+      "templateFile": "api.art",
+      "targetPath": "apps/web-<{config.theme}>/src/api/<{moduleName}>",
+      "targetFileName": "<{kebabCaseName}>.ts"
+    },
+    {
+      "name": "首页模板",
+      "selected": true,
+      "templateFile": "index.art",
+      "targetPath": "apps/web-<{config.theme}>/src/views/<{moduleName}>/<{kebabCaseName}>",
+      "targetFileName": "index.vue"
+    },
+    {
+      "name": "元数据",
+      "selected": true,
+      "templateFile": "schemas.art",
+      "targetPath": "apps/web-<{config.theme}>/src/views/<{moduleName}>/<{kebabCaseName}>/schemas",
+      "targetFileName": "index.ts",
+      "data": true
+    },
+    {
+      "name": "表单页",
+      "selected": true,
+      "templateFile": "form.art",
+      "targetPath": "apps/web-<{config.theme}>/src/views/<{moduleName}>/<{kebabCaseName}>",
+      "targetFileName": "form.vue"
+    },
+    {
+      "name": "详情页",
+      "selected": true,
+      "templateFile": "detail.art",
+      "targetPath": "apps/web-<{config.theme}>/src/views/<{moduleName}>/<{kebabCaseName}>",
+      "targetFileName": "detail.vue"
+    }
+  ]
+}

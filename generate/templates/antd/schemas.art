@@ -1,0 +1,90 @@
+/* eslint-disable prettier/prettier */
+import type { VxeGridProps } from '@vben/plugins/vxe-table';<%
+const hasApiProperty = columns.some(column => 
+  column.componentProps && 'api' in column.componentProps
+);%>
+
+import type { VbenFormProps } from '#/adapter/form';
+<{if hasApiProperty}>
+import { requestClient } from '#/api/request';<{/if}>
+// 表格参数定义
+export const gridSchemas: VxeGridProps<any> = {
+  toolbarConfig: {
+    refresh: true, // 刷新
+    print: false, // 打印
+    export: false, // 导出
+    // custom: true, // 自定义列
+    zoom: true, // 最大化最小化
+  },
+  columns: [<{if !isTree}>
+    { type: 'checkbox', width: 60 },<{/if}><{each columns.filter(item=>item.ext.listHide!=1)}>
+    {
+      field: '<{$value.fieldCamelName}>',
+      title: '<{$value.remark}>',
+      cellRender: {
+        name: '<{$value.component}>',
+        props: {<{each $value.componentProps val,index}>
+          <{index}>: <{stringify(val)}>,<{/each}>
+        },
+      },<{if isTree && $index==0}>
+      treeNode: true,
+      align: 'left',<{/if}>
+    },<{/each}>
+    {
+      width: 160,
+      title: '操作',
+      align: 'center',
+      slots: { default: 'ACTION' },
+      fixed: 'right',
+    },
+  ],
+};
+// 搜索表单参数定义
+export const searchFormSchemas: VbenFormProps = {
+  schema: [<{each columns.filter(item=>item.ext.search==1&&item.ext.searchType)}>
+    {
+      component: '<{$value.component}>',
+      fieldName: 'm_<{$value.ext.tableAlias?$value.ext.tableAlias+'_':''}><{$value.ext.searchType}>_<{$value.fieldCamelName}>',
+      label: '<{$value.remark}>',
+      componentProps: {<{each $value.searchComponentProps val,index}><{if index=='api'}>
+        cacheKey: "<{val.replaceAll('/',':').replace(':','')}>",
+        api: (params: any) => {
+          return requestClient.post('<{val}>', params);
+        },<{else}>
+        <{index}>: <{stringify(val)}>,<{/if}><{/each}>
+      },
+    },<{/each}>
+  ],
+};
+// 表单参数定义
+export const formSchamas: VbenFormProps = {
+  wrapperClass: 'grid-cols-12', // 24栅格,
+  commonConfig: {
+    formItemClass: 'col-span-12',
+  },
+  schema: [<{each columns.filter(item=>item.ext.editHide!=1 || item.ext.addHide!=1)}>
+    {
+      fieldName: '<{$value.fieldCamelName}>',
+      label: '<{$value.remark}>',
+      component: '<{$value.component}>',<{if $value.ext.viewHide == 1}>
+      ifDetail: false,<{/if}><{if $value.component=='Input' && $value.componentProps.type == 'hidden'}>
+      dependencies: {
+        show: false,
+        triggerFields: ['<{$value.fieldCamelName}>'],
+      },<{/if}><{if $value.defaultValue}>
+      defaultValue: <{stringify(handleDefault($value.defaultValue,$value))}>,<{/if}>
+      componentProps: {<{each $value.componentProps val,index}><{if index=='api'}>
+        cacheKey: "<{val.replaceAll('/',':').replace(':','')}>",
+        api: (params: any) => {
+          return requestClient.post('<{val}>', params);
+        },<{else}>
+        <{index}>: <{stringify(val)}>,<{/if}><{/each}>
+      } as any,<{if $value.ext.span}>
+      formItemClass: `col-span-${Number($value.ext.span) / 2}`,
+      detailSpan: Number(item.ext.span) / 2,<{else}>
+      formItemClass: 'col-span-12',
+      detailSpan: 12,<{/if}><{if $value.ext.required == 1}>
+      rules: 'required',<{/if}>
+    },<{/each}>
+  ],
+};
