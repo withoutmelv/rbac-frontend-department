@@ -128,7 +128,7 @@ const handleDelete = (row: any) => {
               label: '新增',
               type: 'primary',
               icon: 'ep:plus',
-              // auth: ['admin', 'sys:knowledge:save'],
+              auth: ['admin', 'sys:knowledge:save'],
               onClick: handleAdd.bind(null),
             },
           ]"
@@ -137,7 +137,7 @@ const handleDelete = (row: any) => {
               label: '删除',
               icon: 'ep:delete',
               ifShow: hasTopTableDropDownActions,
-              // auth: ['admin', 'sys:knowledge:remove'],
+              auth: ['admin', 'sys:knowledge:remove'],
               popConfirm: {
                 title: '确定删除吗？',
                 confirm: handleDelete.bind(null, false),
@@ -162,7 +162,7 @@ const handleDelete = (row: any) => {
               type: 'primary',
               link: true,
               size: 'small',
-              // auth: ['admin', 'sys:knowledge:detail'],
+              auth: ['admin', 'sys:knowledge:detail'],
               onClick: handleDetail.bind(null, row),
             },
             {
@@ -170,7 +170,7 @@ const handleDelete = (row: any) => {
               type: 'primary',
               link: true,
               size: 'small',
-              // auth: ['admin', 'sys:knowledge:update'],
+              auth: ['admin', 'sys:knowledge:update'],
               onClick: handleEdit.bind(null, row),
             },
           ]"
@@ -178,7 +178,7 @@ const handleDelete = (row: any) => {
             {
               label: '删除',
               icon: 'ep:delete',
-              // auth: ['admin', 'sys:knowledge:remove'],
+              auth: ['admin', 'sys:knowledge:remove'],
               popConfirm: {
                 title: '确定删除吗？',
                 confirm: handleDelete.bind(null, row),

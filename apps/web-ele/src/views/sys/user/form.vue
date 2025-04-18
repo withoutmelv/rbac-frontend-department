@@ -9,10 +9,12 @@ import { useVbenForm } from '#/adapter/form';
 import { sysUserDetail, sysUserSave, sysUserUpdate } from '#/api/sys/user';
 
 import { formSchamas } from './schemas';
+import { useUserStore } from '@vben/stores';
 
 const record = ref();
 const isUpdate = ref(false);
 const gridApi = ref();
+const userStore = useUserStore();
 
 const [UserForm, formApi] = useVbenForm({
   showDefaultActions: false,
@@ -24,12 +26,33 @@ const [Modal, modalApi] = useVbenModal({
     record.value = isOpen ? modalApi.getData()?.record || {} : {};
     gridApi.value = isOpen ? modalApi.getData()?.gridApi : null;
     if (isOpen && isUpdate.value) {
+      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+        formApi.updateSchema([
+          {
+            fieldName: 'deptId',
+            componentProps: {
+              disabled: true,
+            },
+          },
+        ]);
+      }
       sysUserDetail({
         id: record.value?.id,
       }).then((data) => {
         formApi.setValues(data);
       });
     } else {
+      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+        formApi.updateSchema([
+          {
+            fieldName: 'deptId',
+            defaultValue: userStore.userInfo.deptId,
+            componentProps: {
+              disabled: true,
+            },
+          },
+        ]);
+      }
       formApi.setValues(record.value);
     }
   },

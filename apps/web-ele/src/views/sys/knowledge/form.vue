@@ -22,11 +22,13 @@ import {
 import { sysKnowledgeAdd, sysKnowledgeUpdate } from '#/api/sys/knowledge';
 
 import { formSchemas } from './schemas';
+import { useUserStore } from '@vben/stores';
 
 const record = ref();
 const isUpdate = ref(false);
 const gridApi = ref();
 const tableData = ref([]);
+const userStore = useUserStore();
 
 const [KnowledgeForm, formApi] = useVbenForm({
   showDefaultActions: false,
@@ -47,6 +49,16 @@ const [Modal, modalApi] = useVbenModal({
           },
         },
       ]);
+      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+        formApi.updateSchema([
+          {
+            fieldName: 'deptId',
+            componentProps: {
+              disabled: true,
+            },
+          },
+        ]);
+      }
       formApi.setValues(record.value);
       handleGetFileList(record.value.name);
     } else {
@@ -58,6 +70,17 @@ const [Modal, modalApi] = useVbenModal({
           },
         },
       ]);
+      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+        formApi.updateSchema([
+          {
+            fieldName: 'deptId',
+            defaultValue: userStore.userInfo.deptId,
+            componentProps: {
+              disabled: true,
+            },
+          },
+        ]);
+      }
     }
   },
   onConfirm() {
