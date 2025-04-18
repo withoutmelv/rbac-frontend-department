@@ -3,11 +3,23 @@ import { ref } from 'vue';
 
 import { useVbenModal } from '@vben/common-ui';
 
-import { ElMessage as message, ElTable, ElTableColumn, ElButton, ElSpace } from 'element-plus';
+import {
+  ElButton,
+  ElSpace,
+  ElTable,
+  ElTableColumn,
+  ElMessage as message,
+} from 'element-plus';
 
 import { useVbenForm } from '#/adapter/form';
+import {
+  DeleteFile,
+  GetFileList,
+  KnowledgeBaseCreate,
+  UpdateKnowledgeBaseInfo,
+  UploadFile,
+} from '#/api/langChain/knowledge-base';
 import { sysKnowledgeAdd, sysKnowledgeUpdate } from '#/api/sys/knowledge';
-import {KnowledgeBaseCreate, UpdateKnowledgeBaseInfo, UploadFile, GetFileList, DeleteFile} from '#/api/langChain/knowledge-base';
 
 import { formSchemas } from './schemas';
 
@@ -27,8 +39,25 @@ const [Modal, modalApi] = useVbenModal({
     record.value = isOpen ? modalApi.getData()?.record || {} : {};
     gridApi.value = isOpen ? modalApi.getData()?.gridApi : null;
     if (isOpen && isUpdate.value) {
+      formApi.updateSchema([
+        {
+          fieldName: 'name',
+          componentProps: {
+            disabled: true,
+          },
+        },
+      ]);
       formApi.setValues(record.value);
       handleGetFileList(record.value.name);
+    } else {
+      formApi.updateSchema([
+        {
+          fieldName: 'name',
+          componentProps: {
+            disabled: false,
+          },
+        },
+      ]);
     }
   },
   onConfirm() {
@@ -36,23 +65,28 @@ const [Modal, modalApi] = useVbenModal({
       if (e.valid) {
         const values = await formApi.getValues();
         modalApi.setState({ loading: true, confirmLoading: true });
-        console.log("values", values);
         // 新增知识库
         if (!isUpdate.value) {
           await KnowledgeBaseCreate({
             knowledge_base_name: values.name,
           });
         }
-        const submitApi = isUpdate.value ? sysKnowledgeUpdate : sysKnowledgeAdd;
-        values.fileCount = (values?.files?.length || 0) + tableData.value.length;
-        values.id = record.value.id;
-        await submitApi(values)
 
         // 更新知识库简介
-        values.description && await UpdateKnowledgeBaseInfo({
-          knowledge_base_name: values.name,
-          kb_info: values.description
-        });
+        values.description &&
+          (await UpdateKnowledgeBaseInfo({
+            knowledge_base_name: values.name,
+            kb_info: values.description,
+          }));
+
+        // 删除文件
+        if (tableData.value.length > 0) {
+          const file_names = tableData.value
+            .filter((item: any) => item.isDeleted)
+            .map((item: any) => item.file_name);
+          file_names.length > 0 &&
+            (await handleDelete(file_names, values.name));
+        }
 
         // 上传文件
         if (values.files && values.files.length > 0) {
@@ -60,21 +94,29 @@ const [Modal, modalApi] = useVbenModal({
           formData.append('knowledge_base_name', values.name);
           formData.append('chunk_size', values.chunkSize);
           formData.append('chunk_overlap', values.chunkOverlap);
-          formData.append('docs', JSON.stringify({
-            "test.txt": [
-              {
-                "metadata": {},
-                "page_content": "custom doc",
-                "type": "Document"
-              }
-            ]
-          }));
+          formData.append(
+            'docs',
+            JSON.stringify({
+              'test.txt': [
+                {
+                  metadata: {},
+                  page_content: 'custom doc',
+                  type: 'Document',
+                },
+              ],
+            }),
+          );
           values.files.forEach((item: { raw: File }) => {
-            formData.append('files', item.raw)
-          })
-          console.log("formData", formData);
-          await UploadFile(formData)
+            formData.append('files', item.raw);
+          });
+          await UploadFile(formData);
         }
+
+        // 更新权限系统的知识库
+        const submitApi = isUpdate.value ? sysKnowledgeUpdate : sysKnowledgeAdd;
+        values.fileCount = await getFileCount(values.name);
+        values.id = record.value.id;
+        await submitApi(values);
         message.success('保存成功');
         gridApi.value?.reload();
         modalApi.close();
@@ -89,16 +131,18 @@ const handleGetFileList = async (name: any) => {
   tableData.value = data || [];
 };
 
-const handleDelete = (row: any) => {
-  DeleteFile({
-    knowledge_base_name: record.value.name,
-    file_names: [row.file_name],
-    delete_content: false,
-    not_refresh_vs_cache: false
-  }).then(() => {
-    message.success('删除成功');
-    handleGetFileList(record.value.name);
-  })
+const handleDelete = async (file_names: any, kb_name: string) => {
+  await DeleteFile({
+    knowledge_base_name: kb_name,
+    file_names,
+    delete_content: true,
+    not_refresh_vs_cache: false,
+  });
+};
+
+const getFileCount = async (name: any) => {
+  const data = await GetFileList(name);
+  return data?.length || 0;
 };
 
 defineExpose(modalApi);
@@ -110,16 +154,31 @@ defineExpose(modalApi);
       <KnowledgeForm />
       <div class="mt-4">
         <h4 class="mb-2">知识库已有文件</h4>
-        <ElTable :data="tableData" border size="small">
+        <ElTable
+          :data="tableData.filter((item) => !(item as any).isDeleted)"
+          border
+          size="small"
+        >
           <ElTableColumn type="index" label="序号" width="60" align="center" />
-          <ElTableColumn prop="file_name" label="名称"  />
-          <ElTableColumn prop="document_loader" label="知识加载器" width="200" />
+          <ElTableColumn prop="file_name" label="名称" />
+          <ElTableColumn
+            prop="document_loader"
+            label="知识加载器"
+            width="200"
+          />
           <ElTableColumn prop="text_splitter" label="分词器" width="200" />
           <ElTableColumn prop="docs_count" label="知识数量" width="120" />
           <ElTableColumn label="操作" width="120">
-            <template #default="scope">
+            <template #default="{ row }">
               <ElSpace>
-                <ElButton type="danger" text size="small" @click="handleDelete(scope.row)">删除</ElButton>
+                <ElButton
+                  type="danger"
+                  text
+                  size="small"
+                  @click="() => (row.isDeleted = true)"
+                >
+                  删除
+                </ElButton>
               </ElSpace>
             </template>
           </ElTableColumn>

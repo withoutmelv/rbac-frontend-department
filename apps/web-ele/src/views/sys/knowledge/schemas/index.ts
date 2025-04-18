@@ -1,12 +1,14 @@
 import type { VxeGridProps } from '@vben/plugins/vxe-table';
+
 import type { VbenFormProps } from '#/adapter/form';
-import { typeMap } from '#/constant/knowledge';
+
+import { h } from 'vue';
+
+import { UploadFilled } from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
-import { UploadFilled } from '@element-plus/icons-vue'
 import { ElIcon } from 'element-plus';
-import {  h } from 'vue';
-import { useUserStore } from '@vben/stores';
-const userStore = useUserStore();
+
+import { typeMap } from '#/constant/knowledge';
 // 表格参数定义
 export const gridSchemas: VxeGridProps<any> = {
   toolbarConfig: {
@@ -17,15 +19,15 @@ export const gridSchemas: VxeGridProps<any> = {
   },
   columns: [
     { type: 'checkbox', width: 60 },
-    { 
-      field: 'id', 
+    {
+      field: 'id',
       title: 'ID',
-      minWidth: 30
+      minWidth: 30,
     },
-    { 
-      field: 'name', 
+    {
+      field: 'name',
       title: '知识标题',
-      minWidth: 130
+      minWidth: 130,
     },
     {
       field: 'type',
@@ -33,7 +35,7 @@ export const gridSchemas: VxeGridProps<any> = {
       minWidth: 100,
       formatter: ({ cellValue }) => {
         return typeMap[cellValue] || cellValue;
-      }
+      },
     },
     {
       field: 'deptId',
@@ -52,36 +54,36 @@ export const gridSchemas: VxeGridProps<any> = {
       field: 'description',
       title: '知识库简介',
       minWidth: 150,
-    }, 
+    },
     {
       field: 'fileCount',
       title: '文件数量',
-      minWidth: 50
+      minWidth: 50,
     },
-    // { 
-    //   field: 'createTime', 
+    // {
+    //   field: 'createTime',
     //   title: '创建时间',
     //   minWidth: 100,
     //   formatter: ({ cellValue }) => {
     //     return cellValue ? dayjs(cellValue).format('YYYY-MM-DD HH:mm:ss') : '';
     //   }
     // },
-    { 
-      field: 'updateTime', 
+    {
+      field: 'updateTime',
       title: '更新时间',
       minWidth: 100,
       formatter: ({ cellValue }) => {
         return cellValue ? dayjs(cellValue).format('YYYY-MM-DD HH:mm:ss') : '';
-      }
+      },
     },
     {
       width: 160,
       title: '操作',
       align: 'center',
       slots: { default: 'ACTION' },
-      fixed: 'right'
-    }
-  ]
+      fixed: 'right',
+    },
+  ],
 };
 
 // 搜索表单参数定义
@@ -93,8 +95,8 @@ export const searchFormSchemas: VbenFormProps = {
       label: '知识标题',
       componentProps: {
         placeholder: '请输入知识标题',
-        allowClear: true
-      }
+        allowClear: true,
+      },
     },
     {
       component: 'Select',
@@ -105,12 +107,12 @@ export const searchFormSchemas: VbenFormProps = {
         allowClear: true,
         options: [
           { label: '部门知识库', value: 'department' },
-          { label: '公共知识库', value: 'public' }
+          { label: '公共知识库', value: 'public' },
         ],
         mode: 'multiple',
       },
     },
-  ]
+  ],
 };
 
 // 表单参数定义
@@ -137,7 +139,7 @@ export const formSchemas: VbenFormProps = {
         // }
       },
       formItemClass: 'col-span-6',
-      detailSpan: 6
+      detailSpan: 6,
     },
     {
       fieldName: 'name',
@@ -173,10 +175,10 @@ export const formSchemas: VbenFormProps = {
         placeholder: '请输入知识库简介',
         rows: 3,
         maxlength: 500,
-        showCount: true
+        showCount: true,
       },
       formItemClass: 'col-span-12',
-      detailSpan: 12
+      detailSpan: 12,
     },
     {
       fieldName: 'files',
@@ -191,7 +193,16 @@ export const formSchemas: VbenFormProps = {
         showUploadList: true,
       },
       renderComponentContent: () => ({
-        default: () => h(ElIcon, { class: 'el-icon-upload', style: 'font-size: 48px; color: #409eff; width: 200px;height: 200px' }, () => h(UploadFilled))
+        default: () =>
+          h(
+            ElIcon,
+            {
+              class: 'el-icon-upload',
+              style:
+                'font-size: 48px; color: #409eff; width: 200px;height: 200px',
+            },
+            () => h(UploadFilled),
+          ),
       }),
       formItemClass: 'col-span-6',
       detailSpan: 6,
@@ -208,13 +219,13 @@ export const formSchemas: VbenFormProps = {
         step: 1,
       },
       formItemClass: 'col-span-6',
-      detailSpan: 6
+      detailSpan: 6,
     },
     {
       fieldName: '',
       component: '',
       formItemClass: 'col-span-6',
-      detailSpan: 6
+      detailSpan: 6,
     },
     {
       fieldName: 'chunkOverlap',
@@ -228,7 +239,7 @@ export const formSchemas: VbenFormProps = {
         'show-input': true,
       },
       formItemClass: 'col-span-6',
-      detailSpan: 6
-    }
-  ]
+      detailSpan: 6,
+    },
+  ],
 };
