@@ -68,7 +68,7 @@ const rememberMe = ref(!!localUsername);
 async function handleSubmit() {
   const { valid } = await formApi.validate();
   const values = await formApi.getValues();
-  console.log(values)
+  console.log(values, valid)
   if (valid) {
     localStorage.setItem(
       REMEMBER_ME_KEY,
