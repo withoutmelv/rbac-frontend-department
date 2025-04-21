@@ -15,8 +15,8 @@ export const KnowledgeBaseCreate = (data: any) =>
   requestClient.post(Api.KnowledgeBaseCreate, 
     {
       ...data, 
-      vector_store_type: 'es',
-      embed_model: 'bge-large-zh-v1.5',
+      vector_store_type: import.meta.env.VITE_VECTOR_STORE_TYPE,
+      embed_model: import.meta.env.VITE_EMBED_MODEL,
     });
 
 export const KnowledgeBaseDelete = (params: any) =>

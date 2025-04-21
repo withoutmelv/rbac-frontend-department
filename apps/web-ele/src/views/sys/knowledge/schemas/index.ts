@@ -7,6 +7,7 @@ import { h } from 'vue';
 import { UploadFilled } from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
 import { ElIcon } from 'element-plus';
+import { z } from '#/adapter/form';
 
 import { typeMap } from '#/constant/knowledge';
 // 表格参数定义
@@ -151,7 +152,15 @@ export const formSchemas: VbenFormProps = {
       },
       formItemClass: 'col-span-12',
       detailSpan: 12,
-      rules: 'selectRequired',
+      rules: z.string()
+        .min(1, { message: '请输入知识库标题' })
+        .refine((value) => {
+          // 修改正则表达式，支持中文，同时保证不以数字开头且不包含大写字母
+          const pattern = /^[^0-9][a-z0-9_\u4e00-\u9fa5]*$/;
+          return pattern.test(value);
+        }, {
+          message: '不能以数字开头且不能包含大写字母',
+        })
     },
     {
       fieldName: 'type',

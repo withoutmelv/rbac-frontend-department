@@ -9,19 +9,19 @@
 
       <!-- 底部功能卡片区 -->
       <div class="card-container">
-        <div class="card-item" @click="handleCardClick('chat')">
+        <div class="card-item" @click="handleCardClick('CHAT')">
           <img :src="chatIcon" alt="对话" />
           <div class="model-tag">deepseek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">对话</div>
         </div>
-        <div class="card-item" @click="handleCardClick('rewrite')">
+        <div class="card-item" @click="handleCardClick('REWRITE')">
           <img :src="rewriteIcon" alt="仿写" />
           <div class="model-tag">deepseek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">仿写</div>
         </div>
-        <div class="card-item" @click="handleCardClick('meeting')">
+        <div class="card-item" @click="handleCardClick('MEETING')">
           <img :src="meetingIcon" alt="会议纪要" />
           <div class="model-tag">deepseek</div>
           <div class="stars">★★★★★</div>
@@ -79,18 +79,21 @@ const currentDialogType = ref('');
 const userStore = useUserStore() as any;
 
 const handleCardClick = (type: string) => {
-  if (type === 'chat' || type === 'rewrite') {
-    currentDialogType.value = type;
-    dialogVisible.value = true;
+  currentDialogType.value = type;
+  if (type === 'CHAT' || type === 'REWRITE') {
+    if (knowledgeLibraries.value.length == 0) {
+      router.push(`/aiChat?mode_name=${type}`);
+    } else {
+      dialogVisible.value = true;
+    }
   } else {
-    router.push('/aiChat');
+    router.push(`/aiChat?mode_name=${type}`);
   }
 }
 
 const knowledgeLibraries = ref([] as any);
 
 onMounted(() => {
-  console.log('userStore', userStore.userInfo)
   if (userStore.userInfo.adminType == '1') {
     sysKnowledgePage({
       current: 1,
@@ -105,16 +108,14 @@ onMounted(() => {
     })
   } else {
     sysfindKnowledgeByRoleId(userStore.userInfo.roleIds[0]).then(data => {
-      console.log(data)
       knowledgeLibraries.value = data
     })
   }
 })
 
 const selectLibrary = (library: any) => {
-  console.log('已选择知识库:', library);
   dialogVisible.value = false;
-  router.push('/aiChat');
+  router.push('/aiChat?kb_name=' + library.name + '&mode_name=' + currentDialogType.value);
 };
 </script>
 

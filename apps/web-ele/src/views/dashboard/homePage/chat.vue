@@ -2,6 +2,7 @@
   <div class="chat-container">
     <iframe 
       :src="iframeUrl"
+      id="aiChatIframe"
       frameborder="0"
       allowfullscreen
       class="chat-iframe"
@@ -12,13 +13,21 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const iframeUrl = ref('http://192.168.32.153:8501/'); // 替换为实际聊天页面URL
+const router = useRouter();
+// 获取当前路由的查询参数
+const route = router.currentRoute.value;
+const modeNameFromQuery = route.query.mode_name || '';
+const kbNameFromQuery = route.query.kb_name as string || import.meta.env[`VITE_${modeNameFromQuery}_DEFAULT`];
+const port = import.meta.env[`VITE_${modeNameFromQuery}_PORT`];
+// 定义iframe的URL
+const iframeUrl = ref(`http://${import.meta.env.VITE_AICHAT_URL}:${port}${modeNameFromQuery !== 'MEETING' ? `/?dialogue_mode=${kbNameFromQuery}` : ''}`); // 替换为实际聊天页面URL
 const isLoading = ref(true);
 
 const onIframeLoad = () => {
   isLoading.value = false;
-  console.log('iframe加载完成');
+  console.log('iframe加载完成', iframeUrl.value);
 };
 </script>
 
