@@ -22,7 +22,7 @@ const modeNameFromQuery = route.query.mode_name || '';
 const kbNameFromQuery = route.query.kb_name as string || import.meta.env[`VITE_${modeNameFromQuery}_DEFAULT`];
 const port = import.meta.env[`VITE_${modeNameFromQuery}_PORT`];
 // 定义iframe的URL
-const iframeUrl = ref(`http://${import.meta.env.VITE_AICHAT_URL}:${port}${modeNameFromQuery !== 'MEETING' ? `/?dialogue_mode=${kbNameFromQuery}` : ''}`); // 替换为实际聊天页面URL
+const iframeUrl = ref(`http://${import.meta.env.PROD ? window.location.hostname : import.meta.env.VITE_AICHAT_URL}:${port}${modeNameFromQuery !== 'MEETING' ? `/?dialogue_mode=${kbNameFromQuery}` : ''}`); // 替换为实际聊天页面URL
 const isLoading = ref(true);
 
 const onIframeLoad = () => {
