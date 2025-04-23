@@ -92,7 +92,7 @@ export const searchFormSchemas: VbenFormProps = {
   schema: [
     {
       component: 'Input',
-      fieldName: 'name',
+      fieldName: 'm_LIKE_name',
       label: '知识标题',
       componentProps: {
         placeholder: '请输入知识标题',
@@ -101,7 +101,7 @@ export const searchFormSchemas: VbenFormProps = {
     },
     {
       component: 'Select',
-      fieldName: 'type',
+      fieldName: 'm_EQ_type',
       label: '知识类型',
       componentProps: {
         placeholder: '请选择知识类型',

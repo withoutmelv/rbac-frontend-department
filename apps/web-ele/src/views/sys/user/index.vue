@@ -37,9 +37,19 @@ const userFormRef = ref();
 const detailFormRef = ref();
 const grantRoleRef = ref();
 const refreshKey= ref(new Date().getTime());
+const currentFormValues = ref({}); // 存储当前表单的值
+
 const formOptions: VbenFormProps = {
   ...searchFormSchemas,
   collapsed: true,
+  handleSubmit: (values) => {
+    currentFormValues.value = values;
+    (gridApi as any).reloadTable();
+  },
+  handleReset: () => {
+    currentFormValues.value = {};
+    (gridApi as any).reloadTable();
+  }
 };
 
 const gridOptions: VxeGridProps<any> = {
@@ -60,7 +70,9 @@ const gridOptions: VxeGridProps<any> = {
   pagerConfig: {},
   proxyConfig: {
     ajax: {
-      query: async ({ page }, formValues) => {
+      query: async ({ page }) => {
+        gridApi.formApi.setValues(currentFormValues.value)
+        const formValues = currentFormValues.value;
         return await sysUserPage({
           pageNum: page.currentPage,
           pageSize: page.pageSize,
