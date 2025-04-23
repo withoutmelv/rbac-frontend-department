@@ -9,9 +9,11 @@ import { ElMessage as message } from 'element-plus';
 
 import { useVbenForm } from '#/adapter/form';
 import { grantRole } from '#/api/sys/user';
+import { useUserStore } from '@vben/stores';
 
 const record = ref();
 const gridApi = ref();
+const userStore = useUserStore();
 const formSchamas: VbenFormProps = {
   schema: [
     {
@@ -34,6 +36,7 @@ const formSchamas: VbenFormProps = {
         api: '/sys/role/select',
         multiple: true,
         params: {
+          deptId: (userStore && userStore.userInfo) ? userStore.userInfo.deptId : undefined,
           includeType: 1,
           pageNum: 1,
           pageSize: 1000,
