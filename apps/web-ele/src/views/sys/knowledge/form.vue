@@ -49,7 +49,7 @@ const [Modal, modalApi] = useVbenModal({
           },
         },
       ]);
-      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+      if (!userStore.isAdmin) {
         formApi.updateSchema([
           {
             fieldName: 'deptId',
@@ -70,11 +70,11 @@ const [Modal, modalApi] = useVbenModal({
           },
         },
       ]);
-      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+      if (!userStore.isAdmin) {
         formApi.updateSchema([
           {
             fieldName: 'deptId',
-            defaultValue: userStore.userInfo.deptId,
+            defaultValue: userStore?.userInfo?.deptId,
             componentProps: {
               disabled: true,
             },
@@ -141,7 +141,7 @@ const [Modal, modalApi] = useVbenModal({
         values.id = record.value.id;
         await submitApi(values);
         message.success('保存成功');
-        gridApi.value?.reload();
+        gridApi.value?.reloadTable();
         modalApi.close();
         modalApi.setState({ loading: false, confirmLoading: false });
       }

@@ -12,7 +12,7 @@ enum Api {
 }
 
 export const sysKnowledgePage = (params?: any) =>
-  requestClient.post(Api.KnowledgePage, {...params, isAdmin: userStore.userInfo.adminType == '1'});
+  requestClient.post(Api.KnowledgePage, {...params, isAdmin: userStore.isAdmin});
 
 export const sysKnowledgeList = (params?: any) =>
   requestClient.post(Api.KnowledgePage, {...params});

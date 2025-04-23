@@ -7,7 +7,7 @@ const userStore = useUserStore() as any;
  * @param data
  */
 export async function sysRolePage(data: any) {
-  return requestClient.post<any>('/sys/role/page', {...data, isAdmin: userStore.userInfo.adminType == '1'});
+  return requestClient.post<any>('/sys/role/page', {...data, isAdmin: userStore.isAdmin});
 }
 /**
  * 添加角色

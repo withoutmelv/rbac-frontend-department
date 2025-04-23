@@ -94,7 +94,7 @@ const handleCardClick = (type: string) => {
 const knowledgeLibraries = ref([] as any);
 
 onMounted(() => {
-  if (userStore.userInfo.adminType == '1') {
+  if (userStore.isAdmin) {
     sysKnowledgePage({
       current: 1,
       size: 9999,

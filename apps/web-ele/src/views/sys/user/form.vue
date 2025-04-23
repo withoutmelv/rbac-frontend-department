@@ -26,7 +26,7 @@ const [Modal, modalApi] = useVbenModal({
     record.value = isOpen ? modalApi.getData()?.record || {} : {};
     gridApi.value = isOpen ? modalApi.getData()?.gridApi : null;
     if (isOpen && isUpdate.value) {
-      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+      if (!userStore.isAdmin) {
         formApi.updateSchema([
           {
             fieldName: 'deptId',
@@ -42,7 +42,7 @@ const [Modal, modalApi] = useVbenModal({
         formApi.setValues(data);
       });
     } else {
-      if (userStore.userInfo && userStore.userInfo.adminType != 1) {
+      if (!userStore.isAdmin) {
         formApi.updateSchema([
           {
             fieldName: 'deptId',

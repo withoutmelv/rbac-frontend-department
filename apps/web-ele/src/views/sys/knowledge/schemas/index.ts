@@ -135,9 +135,6 @@ export const formSchemas: VbenFormProps = {
         labelField: 'name',
         valueField: 'id',
         allowClear: true,
-        // disabled: () => {
-        //   return userStore?.userInfo?.adminType === '1' ? false : true;
-        // }
       },
       formItemClass: 'col-span-6',
       detailSpan: 6,

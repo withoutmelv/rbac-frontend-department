@@ -26,6 +26,7 @@ const userStore = useUserStore();
 const hasTopTableDropDownActions = ref(false);
 const knowledgeFormRef = ref();
 const detailFormRef = ref();
+const refreshKey = ref(new Date().getTime());
 
 const formOptions: VbenFormProps = {
   ...searchFormSchemas,
@@ -78,6 +79,13 @@ const [Grid, gridApi] = useVbenVxeGrid({
   gridEvents,
 });
 
+const reloadTable = () => {
+  refreshKey.value = new Date().getTime();
+  gridApi.reload();
+};
+// 使用类型断言解决类型报错问题
+(gridApi as any).reloadTable = reloadTable;
+
 const handleAdd = () => {
   knowledgeFormRef.value.setData({
     isUpdate: false,
@@ -113,14 +121,14 @@ const handleDelete = (row: any) => {
   names.forEach(KnowledgeBaseDelete);
   sysKnowledgeRemove({ ids }).then(() => {
     message.success('删除成功');
-    gridApi.reload();
+    (gridApi as any).reloadTable();
   });
 };
 </script>
 
 <template>
   <Page auto-content-height>
-    <Grid>
+    <Grid :key="refreshKey">
       <template #toolbar-buttons>
         <TableAction
           :actions="[

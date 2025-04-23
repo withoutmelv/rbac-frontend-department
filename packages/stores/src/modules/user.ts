@@ -35,6 +35,7 @@ interface AccessState {
    * 用户角色
    */
   userRoles: string[];
+  isAdmin: boolean;
 }
 
 /**
@@ -48,6 +49,11 @@ export const useUserStore = defineStore('core-user', {
     setUserInfo(userInfo: BasicUserInfo | null) {
       // 设置用户信息
       this.userInfo = userInfo;
+      if (userInfo && userInfo.adminType == '1') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
       // 设置角色信息
       const roles = userInfo?.roles ?? [];
       this.setUserRoles(roles);
@@ -60,6 +66,7 @@ export const useUserStore = defineStore('core-user', {
     accessCodes: [],
     userInfo: null,
     userRoles: [],
+    isAdmin: false,
   }),
 });
 
