@@ -23,9 +23,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
   VbenAvatar,
-  VbenIcon,
 } from '@vben-core/shadcn-ui';
-
+import {ElIcon} from 'element-plus'
 import { useMagicKeys, whenever } from '@vueuse/core';
 
 import { LockScreenModal } from '../lock-screen';
@@ -250,7 +249,9 @@ if (enableShortcutKey.value) {
           class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
           @click="menu.handler"
         >
-          <VbenIcon :icon="menu.icon" class="mr-2 size-4" />
+          <ElIcon  class="mr-2 size-4" >
+            <component :is="menu.icon"></component>
+          </ElIcon>
           {{ menu.text }}
         </DropdownMenuItem>
         <DropdownMenuSeparator />

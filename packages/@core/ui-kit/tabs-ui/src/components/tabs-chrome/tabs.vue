@@ -6,8 +6,8 @@ import type { TabConfig, TabsProps } from '../../types';
 import { computed, ref } from 'vue';
 
 import { Pin, X } from '@vben-core/icons';
-import { VbenContextMenu, VbenIcon } from '@vben-core/shadcn-ui';
-
+import { VbenContextMenu } from '@vben-core/shadcn-ui';
+import {ElIcon} from 'element-plus';
 interface Props extends TabsProps {}
 
 defineOptions({
@@ -154,11 +154,9 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
             <div
               class="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150"
             >
-              <VbenIcon
-                v-if="showIcon"
-                :icon="tab.icon"
-                class="mr-1 flex size-4 items-center overflow-hidden"
-              />
+              <ElIcon class="mr-1 flex size-4 items-center overflow-hidden" v-if="showIcon">
+                <component :is="tab.icon"></component>
+              </ElIcon>
 
               <span class="flex-1 overflow-hidden whitespace-nowrap text-sm">
                 {{ tab.title }}

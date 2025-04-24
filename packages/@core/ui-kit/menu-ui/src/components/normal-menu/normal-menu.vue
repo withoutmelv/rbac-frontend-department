@@ -4,7 +4,7 @@ import type { MenuRecordRaw } from '@vben-core/typings';
 import type { NormalMenuProps } from './normal-menu';
 
 import { useNamespace } from '@vben-core/composables';
-import { VbenIcon } from '@vben-core/shadcn-ui';
+import {ElIcon} from 'element-plus';
 
 interface Props extends NormalMenuProps {}
 
@@ -50,7 +50,9 @@ function menuIcon(menu: MenuRecordRaw) {
         @click="() => emit('select', menu)"
         @mouseenter="() => emit('enter', menu)"
       >
-        <VbenIcon :class="e('icon')" :icon="menuIcon(menu)" fallback />
+        <ElIcon :class="e('icon')">
+          <component :is="menuIcon(menu)"></component>
+        </ElIcon>
 
         <span :class="e('name')" class="truncate"> {{ menu.name }}</span>
       </li>

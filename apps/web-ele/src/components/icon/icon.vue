@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { IconifyIcon as VbenIcon } from '@vben/icons';
 
 import { ElIcon } from 'element-plus';
 

@@ -15,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../../ui';
-import { VbenIcon } from '../icon';
+import {ElIcon} from 'element-plus';
 
 interface Props extends BreadcrumbProps {}
 
@@ -45,7 +45,9 @@ function handleClick(path?: string) {
             <div v-if="item.items?.length ?? 0 > 0">
               <DropdownMenu>
                 <DropdownMenuTrigger class="flex items-center gap-1">
-                  <VbenIcon v-if="showIcon" :icon="item.icon" class="size-5" />
+                  <ElIcon class="size-5" v-if="showIcon">
+                    <component :is="item.icon"></component>
+                  </ElIcon>
                   {{ item.title }}
                   <ChevronDown class="size-4" />
                 </DropdownMenuTrigger>
@@ -67,23 +69,17 @@ function handleClick(path?: string) {
               @click.stop="handleClick(item.path)"
             >
               <div class="flex-center">
-                <VbenIcon
-                  v-if="showIcon"
-                  :class="{ 'size-5': item.isHome }"
-                  :icon="item.icon"
-                  class="mr-1 size-4"
-                />
+                <ElIcon :class="{ 'size-5': item.isHome }" class="mr-1 size-4" v-if="showIcon">
+                  <component :is="item.icon"></component>
+                </ElIcon>
                 {{ item.title }}
               </div>
             </BreadcrumbLink>
             <BreadcrumbPage v-else>
               <div class="flex-center">
-                <VbenIcon
-                  v-if="showIcon"
-                  :class="{ 'size-5': item.isHome }"
-                  :icon="item.icon"
-                  class="mr-1 size-4"
-                />
+                <ElIcon :class="{ 'size-5': item.isHome }" class="mr-1 size-4" v-if="showIcon">
+                  <component :is="item.icon"></component>
+                </ElIcon>
                 {{ item.title }}
               </div>
             </BreadcrumbPage>
