@@ -13,10 +13,10 @@ import { $t } from '#/locales';
 
 <template>
   <AuthPageLayout
-    app-name="deepseek AI应用赋能平台"
+    app-name="DeepSeek AI应用赋能平台"
     :logo="logo"
     page-description="CopyRight © 2025"
-    page-title="deepseek AI应用赋能平台"
+    page-title="DeepSeek AI应用赋能平台"
   >
     <!-- 自定义工具栏 -->
     <!-- <template #toolbar></template> -->

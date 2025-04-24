@@ -4,26 +4,26 @@
       <!-- 顶部图片展示区 -->
       <div class="banner-container">
         <img :src="banner" alt="首页banner" class="banner-image" />
-        <div class="banner-title">欢迎来到deepseek AI应用赋能平台</div>
+        <div class="banner-title">欢迎来到DeepSeek AI应用赋能平台</div>
       </div>
 
       <!-- 底部功能卡片区 -->
       <div class="card-container">
         <div class="card-item" @click="handleCardClick('CHAT')">
           <img :src="chatIcon" alt="对话" />
-          <div class="model-tag">deepseek</div>
+          <div class="model-tag">DeepSeek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">对话</div>
         </div>
         <div class="card-item" @click="handleCardClick('REWRITE')">
           <img :src="rewriteIcon" alt="仿写" />
-          <div class="model-tag">deepseek</div>
+          <div class="model-tag">DeepSeek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">仿写</div>
         </div>
         <div class="card-item" @click="handleCardClick('MEETING')">
           <img :src="meetingIcon" alt="会议纪要" />
-          <div class="model-tag">deepseek</div>
+          <div class="model-tag">DeepSeek</div>
           <div class="stars">★★★★★</div>
           <div class="card-title">会议纪要</div>
         </div>
