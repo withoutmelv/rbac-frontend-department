@@ -46,7 +46,7 @@ const loadKnowledge = async () => {
   const responseData = await sysfindKnowledgeByRoleId(record.value.id);
   console.log('当前角色已授权的知识库', responseData);
   if (responseData) {
-    const authorizedKnowledgeIds = responseData.map((item: {knowledgeId: string}) => item.knowledgeId);
+    const authorizedKnowledgeIds = responseData.map((item: {id: string}) => item.id);
     knowledgeList.value.forEach(item => {
       // 标记已授权的知识库
       console.log('item', item, authorizedKnowledgeIds.includes((item as {id: string}).id));

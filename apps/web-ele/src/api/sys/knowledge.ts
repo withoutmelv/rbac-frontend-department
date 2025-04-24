@@ -5,6 +5,7 @@ const userStore = useUserStore() as any;
 
 enum Api {
   KnowledgePage = '/sys/knowledge/page',
+  KnowledgeList = '/sys/knowledge/list',
   KnowledgeAdd = '/sys/knowledge/save',
   KnowledgeUpdate = '/sys/knowledge/update',
   KnowledgeDelete = '/sys/knowledge/delete',
@@ -15,7 +16,7 @@ export const sysKnowledgePage = (params?: any) =>
   requestClient.post(Api.KnowledgePage, {...params, isAdmin: userStore.isAdmin});
 
 export const sysKnowledgeList = (params?: any) =>
-  requestClient.post(Api.KnowledgePage, {...params});
+  requestClient.post(Api.KnowledgeList, {...params, isAdmin: userStore.isAdmin});
 
 export const sysKnowledgeRemove = (params: any) =>
   requestClient.post(Api.KnowledgeDelete, params);
