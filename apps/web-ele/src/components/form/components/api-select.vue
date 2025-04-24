@@ -139,7 +139,7 @@ watch(
     />
     <template v-if="loading" #empty>
       <span>
-        <Icon class="mr-1" icon="ep:loading" spin />
+        <Icon class="mr-1" icon="Loading" spin />
         请等待数据加载完成
       </span>
     </template>

@@ -60,7 +60,7 @@ const handleChange = (info: any) => {
       <Icon
         :size="48"
         class="mt-[36px]"
-        icon="ant-design:cloud-upload-outlined"
+        icon="UploadFilled"
       />
     </div>
   </Upload>

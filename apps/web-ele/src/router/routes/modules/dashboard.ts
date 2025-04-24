@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('#/views/dashboard/homePage/index.vue'),
     meta: {
       affixTab: true,
-      icon: 'lucide:area-chart',
+      icon: 'area-chart',
       title: '首页',
     },
   },
@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     path: '/aiChat',
     component: () => import('#/views/dashboard/homePage/chat.vue'),
     meta: {
-      icon: 'carbon:workspace',
+      icon: 'workspace',
       title: 'AI赋能支撑平台',
       hideInMenu: true,
     },

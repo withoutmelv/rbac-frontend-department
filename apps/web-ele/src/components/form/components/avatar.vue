@@ -46,12 +46,12 @@ const handleRemove = (e: Event) => {
     <div v-if="mValue" class="m-avatar-wrap">
       <Icon
         class="m-avatar-icon-delete"
-        icon="ant-design:delete-outlined"
+        icon="Delete"
         @click="handleRemove"
       />
       <img :src="mValue" width="100%" />
     </div>
-    <Icon v-else icon="ant-design:plus-outlined" />
+    <Icon v-else icon="Plus" />
   </Upload>
 </template>
 <style lang="less" scoped>

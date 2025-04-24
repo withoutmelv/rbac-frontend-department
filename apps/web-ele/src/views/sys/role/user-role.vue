@@ -163,7 +163,7 @@ defineExpose(DrawerApi);
               {
                 label: '添加用户',
                 type: 'primary',
-                icon: 'ep:plus',
+                icon: 'Plus',
                 auth: ['admin', 'sys:rbac:saveUserRole'],
                 onClick: handleAdd.bind(null),
               },
@@ -171,7 +171,7 @@ defineExpose(DrawerApi);
             :drop-down-actions="[
               {
                 label: '移除用户',
-                icon: 'ep:delete',
+                icon: 'Delete',
                 ifShow: hasTopTableDropDownActions,
                 auth: ['admin', 'sys:rbac:removeUserRole'],
                 popConfirm: {
@@ -184,7 +184,7 @@ defineExpose(DrawerApi);
             <template #more>
               <Button style="margin-left: 8px">
                 批量操作
-                <Icon icon="ep:arrow-down" />
+                <Icon icon="ArrowDown" />
               </Button>
             </template>
           </TableAction>
@@ -196,7 +196,7 @@ defineExpose(DrawerApi);
                 label: '移除用户',
                 type: 'primary',
                 link: true,
-                icon: 'ep:delete',
+                icon: 'Delete',
                 size: 'small',
                 auth: ['admin', 'sys:rbac:removeUserRole'],
                 popConfirm: {

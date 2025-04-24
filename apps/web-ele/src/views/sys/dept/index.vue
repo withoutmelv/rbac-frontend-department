@@ -153,14 +153,14 @@ const handleExpandAndCollapse = () => {
             {
               label: '新增',
               type: 'primary',
-              icon: 'ep:plus',
+              icon: 'Plus',
               auth: ['admin', 'sys:dept:save'],
               onClick: handleAdd.bind(null, {}),
             },
             {
               label: isExpand ? '折叠' : '展开',
               type: 'primary',
-              icon: isExpand ? 'ep:folder-opened' : 'ep:folder',
+              icon: isExpand ? 'FolderOpened' : 'Folder',
               onClick: handleExpandAndCollapse.bind(null),
             },
           ]"
@@ -192,7 +192,7 @@ const handleExpandAndCollapse = () => {
               label: '添加下级',
               type: 'primary',
               link: true,
-              icon: 'ep:plus',
+              icon: 'Plus',
               size: 'small',
               auth: ['admin', 'sys:dept:save'],
               onClick: handleAdd.bind(null, {
@@ -201,7 +201,7 @@ const handleExpandAndCollapse = () => {
             },
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               auth: ['admin', 'sys:dept:remove'],
               popConfirm: {
                 title: '确定删除吗？',

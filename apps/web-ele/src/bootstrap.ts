@@ -10,6 +10,8 @@ import '@vben/styles/ele';
 
 import { useTitle } from '@vueuse/core';
 import { ElLoading } from 'element-plus';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
 
 import { $t, setupI18n } from '#/locales';
 
@@ -38,6 +40,10 @@ async function bootstrap(namespace: string) {
     loading: false, // Vben提供的v-loading指令和Element Plus提供的v-loading指令二选一即可，此处false表示不注册Vben提供的v-loading指令
     spinning: 'spinning',
   });
+
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
 
   // 国际化 i18n 配置
   await setupI18n(app);

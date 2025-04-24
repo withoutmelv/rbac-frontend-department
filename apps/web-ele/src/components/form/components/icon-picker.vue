@@ -135,7 +135,7 @@ const handlePageChange = (page: number) => {
         <template #reference>
           <div ref="trigger">
             <ElIcon>
-              <Icon :icon="mValue || 'ep:search'" />
+              <Icon :icon="mValue || 'Search'" />
             </ElIcon>
           </div>
         </template>

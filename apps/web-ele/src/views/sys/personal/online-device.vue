@@ -100,7 +100,7 @@ const handleDelete = (row: any) => {
           :actions="[
             {
               label: '踢下线',
-              icon: 'ant-design:delete-outlined',
+              icon: 'Delete',
               link: true,
               popConfirm: {
                 title: '确定踢下线吗？',

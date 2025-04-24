@@ -169,7 +169,7 @@ const handleRef = (e: any, index: number) => {
         <div>
           <slot name="more">
             <ElButton link size="small" style="margin-left: 6px" type="primary">
-              <Icon class="icon-more" icon="ep:more" />
+              <Icon class="icon-more" icon="More" />
             </ElButton>
           </slot>
           <template v-for="(action, index) in getDropdownList" :key="index">

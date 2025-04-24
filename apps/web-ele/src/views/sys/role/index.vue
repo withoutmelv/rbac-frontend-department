@@ -171,7 +171,7 @@ const handleUserRole = (record: any) => {
             {
               label: '新增',
               type: 'primary',
-              icon: 'ep:plus',
+              icon: 'Plus',
               auth: ['admin', 'sys:role:save'],
               onClick: handleAdd.bind(null),
             },
@@ -179,7 +179,7 @@ const handleUserRole = (record: any) => {
           :drop-down-actions="[
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               ifShow: hasTopTableDropDownActions,
               auth: ['admin', 'sys:role:remove'],
               popConfirm: {
@@ -192,7 +192,7 @@ const handleUserRole = (record: any) => {
           <template #more>
             <Button style="margin-left: 8px">
               批量操作
-              <Icon icon="ep:arrow-down" />
+              <Icon icon="ArrowDown" />
             </Button>
           </template>
         </TableAction>
@@ -237,7 +237,7 @@ const handleUserRole = (record: any) => {
           :drop-down-actions="[
             {
               label: '编辑',
-              icon: 'ep:edit',
+              icon: 'Edit',
               type: 'primary',
               link: true,
               size: 'small',
@@ -246,7 +246,7 @@ const handleUserRole = (record: any) => {
             },
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               auth: ['admin', 'sys:role:remove'],
               popConfirm: {
                 title: '确定删除吗？',

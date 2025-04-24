@@ -5,7 +5,6 @@ import { computed, h, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { AuthenticationLoginExpiredModal } from '@vben/common-ui';
-import { VBEN_DOC_URL, VBEN_GITHUB_URL } from '@vben/constants';
 import { useTabs, useWatermark } from '@vben/hooks';
 import { BookOpenText, CircleHelp, SvgGiteeIcon } from '@vben/icons';
 import {
@@ -48,7 +47,7 @@ const menus = computed(() => [
     },
     icon: () => {
       return h(Icon, {
-        icon: 'ant-design:user-outlined',
+        icon: 'User',
       });
     },
     text: '个人中心',
@@ -56,7 +55,7 @@ const menus = computed(() => [
 ]);
 
 const avatar = computed(() => {
-  return userStore.userInfo?.avatar ?? preferences.app.defaultAvatar;
+  return userStore.userInfo?.avatar ?? '';
 });
 
 async function handleLogout() {

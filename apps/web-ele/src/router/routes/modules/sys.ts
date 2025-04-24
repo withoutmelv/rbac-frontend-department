@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'ant-design:setting-outlined',
+      icon: 'Setting',
       keepAlive: true,
       order: 1000,
       title: '系统设置',
@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         meta: {
-          icon: 'ant-design:user-outlined',
+          icon: 'User',
           title: '用户管理',
           perms: ['admin', 'sys:user'], // 拥有权限码才能访问
         },
@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         meta: {
-          icon: 'ant-design:team-outlined',
+          icon: 'Monitor',
           title: '角色管理',
           perms: ['admin', 'sys:role'], // 拥有权限码才能访问
         },
@@ -47,7 +47,7 @@ const routes: RouteRecordRaw[] = [
       // },
       {
         meta: {
-          icon: 'ant-design:deployment-unit-outlined',
+          icon: 'Link',
           title: '部门管理',
           perms: ['admin'], // 拥有权限码才能访问
         },
@@ -87,7 +87,7 @@ const routes: RouteRecordRaw[] = [
       // },
       {
         meta: {
-          icon: 'ant-design:book-outlined',
+          icon: 'Notebook',
           title: '知识库管理',
           perms: ['admin', 'sys:knowledge'],
         },

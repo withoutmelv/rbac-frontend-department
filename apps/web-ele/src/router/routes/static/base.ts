@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'ant-design:user-outlined',
+      icon: 'User',
       keepAlive: true,
       order: 1000,
       title: '个人中心',
@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         meta: {
-          icon: 'ant-design:user-switch-outlined',
+          icon: 'User',
           title: '个人中心',
           hideInMenu: true,
           ignoreSync: true,

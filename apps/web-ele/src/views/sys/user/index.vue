@@ -220,7 +220,7 @@ const handleDelete = (row: any) => {
             {
               label: '新增',
               type: 'primary',
-              icon: 'ep:plus',
+              icon: 'Plus',
               auth: ['admin', 'sys:user:save'],
               onClick: handleAdd.bind(null),
             },
@@ -228,7 +228,7 @@ const handleDelete = (row: any) => {
           :drop-down-actions="[
             {
               label: '重置密码',
-              icon: 'ep:setting',
+              icon: 'Setting',
               ifShow: hasTopTableDropDownActions,
               auth: ['admin', 'sys:user:resetPassword'],
               popConfirm: {
@@ -238,7 +238,7 @@ const handleDelete = (row: any) => {
             },
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               ifShow: hasTopTableDropDownActions,
               auth: ['admin', 'sys:user:remove'],
               popConfirm: {
@@ -280,7 +280,7 @@ const handleDelete = (row: any) => {
           :drop-down-actions="[
             {
               label: '扮演用户',
-              icon: 'ep:video-play',
+              icon: 'VideoPlay',
               auth: ['admin', 'sys:playUser'],
               popConfirm: {
                 title: `是否扮演该用户？`,
@@ -289,7 +289,7 @@ const handleDelete = (row: any) => {
             },
             {
               label: '重置密码',
-              icon: 'ep:setting',
+              icon: 'Setting',
               auth: ['admin', 'sys:user:resetPassword'],
               popConfirm: {
                 title: `是否重置该用户密码？`,
@@ -298,13 +298,13 @@ const handleDelete = (row: any) => {
             },
             {
               label: '授权角色',
-              icon: 'ep:user',
+              icon: 'User',
               auth: ['admin', 'sys:user:grantRole'],
               onClick: handleGrantRole.bind(null, row),
             },
             {
               label: '锁定用户',
-              icon: 'ep:lock',
+              icon: 'Lock',
               auth: ['admin', 'sys:user:locked'],
               popConfirm: {
                 title: `是否锁定该用户？`,
@@ -320,7 +320,7 @@ const handleDelete = (row: any) => {
             },
             {
               label: '取消锁定',
-              icon: 'ep:unlock',
+              icon: 'Unlock',
               auth: ['admin', 'sys:user:unLocked'],
               popConfirm: {
                 title: `是否取消锁定该用户？`,
@@ -336,7 +336,7 @@ const handleDelete = (row: any) => {
             },
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               auth: ['admin', 'sys:user:remove'],
               popConfirm: {
                 title: '确定删除吗？',

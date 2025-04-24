@@ -146,7 +146,7 @@ const handleDelete = (row: any) => {
             {
               label: '新增',
               type: 'primary',
-              icon: 'ep:plus',
+              icon: 'Plus',
               auth: ['admin', 'sys:knowledge:save'],
               onClick: handleAdd.bind(null),
             },
@@ -154,7 +154,7 @@ const handleDelete = (row: any) => {
           :drop-down-actions="[
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               ifShow: hasTopTableDropDownActions,
               auth: ['admin', 'sys:knowledge:remove'],
               popConfirm: {
@@ -196,7 +196,7 @@ const handleDelete = (row: any) => {
           :drop-down-actions="[
             {
               label: '删除',
-              icon: 'ep:delete',
+              icon: 'Delete',
               auth: ['admin', 'sys:knowledge:remove'],
               popConfirm: {
                 title: '确定删除吗？',

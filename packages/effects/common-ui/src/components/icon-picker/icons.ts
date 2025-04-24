@@ -35,8 +35,8 @@ export async function fetchIconsData(prefix: string): Promise<string[]> {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 1000 * 10);
       const response: IconifyResponse = await fetch(
-        `https://api.iconify.design/collection?prefix=${prefix}`,
-        { signal: controller.signal },
+        // `https://api.iconify.design/collection?prefix=${prefix}`,
+        // { signal: controller.signal },
       ).then((res) => res.json());
       clearTimeout(timeoutId);
       const list = response.uncategorized || [];

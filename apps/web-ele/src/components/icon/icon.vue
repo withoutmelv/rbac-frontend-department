@@ -9,10 +9,11 @@ const props = defineProps({
     default: '',
   },
 });
+console.log("-----------", props.icon)
 </script>
 
 <template>
   <ElIcon>
-    <VbenIcon :icon="props.icon" />
+     <component :is="props.icon"></component>
   </ElIcon>
 </template>
