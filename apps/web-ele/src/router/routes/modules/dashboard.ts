@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     path: '/aiChat',
     component: () => import('#/views/dashboard/homePage/chat.vue'),
     meta: {
-      icon: 'workspace',
+      icon: 'ChatLineRound',
       title: 'AI赋能支撑平台',
       hideInMenu: true,
     },
