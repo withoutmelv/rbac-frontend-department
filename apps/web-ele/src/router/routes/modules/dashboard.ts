@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('#/views/dashboard/homePage/index.vue'),
     meta: {
       affixTab: true,
-      icon: 'area-chart',
+      icon: 'House',
       title: '首页',
     },
   },

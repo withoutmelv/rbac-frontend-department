@@ -6,7 +6,7 @@ import { computed } from 'vue';
 import { useNamespace } from '@vben-core/composables';
 import { ChevronDown, ChevronRight } from '@vben-core/icons';
 import { VbenIcon } from '@vben-core/shadcn-ui';
-
+import {ElIcon} from 'element-plus';
 import { useMenuContext } from '../hooks';
 
 interface Props extends MenuItemProps {
@@ -82,12 +82,15 @@ const iconArrowStyle = computed(() => {
   >
     <slot></slot>
 
-    <VbenIcon
+    <!-- <VbenIcon
       v-if="!isMenuMore"
       :class="nsMenu.e('icon')"
       :icon="icon"
       fallback
-    />
+    /> -->
+    <ElIcon v-if="!isMenuMore" :class="nsMenu.e('icon')">
+      <component :is="icon"></component>
+    </ElIcon>
 
     <div v-if="!hiddenTitle" :class="[e('title')]">
       <slot name="title"></slot>

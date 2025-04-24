@@ -8,6 +8,7 @@ import { VbenIcon, VbenTooltip } from '@vben-core/shadcn-ui';
 
 import { MenuBadge } from '../components';
 import { useMenu, useMenuContext, useSubMenuContext } from '../hooks';
+import { ElIcon } from 'element-plus';
 
 interface Props extends MenuItemProps {}
 
@@ -99,7 +100,9 @@ onBeforeUnmount(() => {
     >
       <template #trigger>
         <div :class="[nsMenu.be('tooltip', 'trigger')]">
-          <VbenIcon :class="nsMenu.e('icon')" :icon="menuIcon" fallback />
+          <ElIcon :class="nsMenu.e('icon')">
+            <component :is="menuIcon"></component>
+          </ElIcon>
           <slot></slot>
           <span v-if="collapseShowTitle" :class="nsMenu.e('name')">
             <slot name="title"></slot>
@@ -114,7 +117,9 @@ onBeforeUnmount(() => {
         class="right-2"
         v-bind="props"
       />
-      <VbenIcon :class="nsMenu.e('icon')" :icon="menuIcon" />
+      <ElIcon :class="nsMenu.e('icon')">
+        <component :is="menuIcon"></component>
+      </ElIcon>
       <slot></slot>
       <slot name="title"></slot>
     </div>
