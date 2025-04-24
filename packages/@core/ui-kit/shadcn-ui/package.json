@@ -49,6 +49,7 @@
     "lucide-vue-next": "catalog:",
     "radix-vue": "catalog:",
     "vee-validate": "catalog:",
-    "vue": "catalog:"
+    "vue": "catalog:",
+    "element-plus": "catalog:"
   }
 }
