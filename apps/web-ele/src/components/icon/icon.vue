@@ -9,7 +9,6 @@ const props = defineProps({
     default: '',
   },
 });
-console.log("-----------", props.icon)
 </script>
 
 <template>
