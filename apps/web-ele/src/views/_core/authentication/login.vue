@@ -1,28 +1,25 @@
 <script lang="ts" setup>
 import type { VbenFormSchema } from '@vben/common-ui';
 
-import { computed, markRaw, ref } from 'vue';
+import { computed } from 'vue';
 
-import { AuthenticationLogin, ImageCaptcha, z } from '@vben/common-ui';
+import { AuthenticationLogin, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { captcha } from '#/api/core';
 import { useAuthStore } from '#/store';
 
 defineOptions({ name: 'Login' });
 
 const authStore = useAuthStore();
-const imageCaptchaRef = ref();
 
 const REMEMBER_ME_KEY = `REMEMBER_ME_${location.hostname}`;
-const localUser = JSON.parse(localStorage.getItem(REMEMBER_ME_KEY) || '{}');
-const defaultUserName = localUser.userName ? localUser.userName : '';
-const defaultPassword = localUser.password ? localUser.password : '';
+const localUserName = localStorage.getItem(REMEMBER_ME_KEY) || '';
+
 const formSchema = computed((): VbenFormSchema[] => {
   return [
         {
           component: 'VbenInput',
-          defaultValue: defaultUserName,
+          defaultValue: localUserName,
           componentProps: {
             placeholder: $t('authentication.usernameTip'),
           },
@@ -35,7 +32,6 @@ const formSchema = computed((): VbenFormSchema[] => {
         },
         {
           component: 'VbenInputPassword',
-          defaultValue: defaultPassword,
           componentProps: {
             placeholder: $t('authentication.password'),
           },
@@ -49,7 +45,6 @@ const formSchema = computed((): VbenFormSchema[] => {
       ];
 });
 const handleSubmit = (data: any) => {
-  console.log("进来拉")
   authStore.authLogin(data);
 };
 </script>
