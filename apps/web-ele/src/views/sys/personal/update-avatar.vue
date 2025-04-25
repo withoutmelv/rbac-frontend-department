@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import { useAccessStore, useUserStore } from '@vben/stores';
 
@@ -20,7 +20,7 @@ defineProps({
 });
 const accessStore = useAccessStore();
 const userStore = useUserStore();
-
+const refreshAvatar = ref(new Date().getTime());
 const getAction = computed(() => {
   return `${import.meta.env.VITE_GLOB_API_URL}/sys/fileInfo/upload`;
 });
@@ -41,6 +41,7 @@ const handleChange = (info: any) => {
       ...userStore.userInfo,
       avatar: info.data.fullUrl ?? info.data.url,
     } as any);
+    refreshAvatar.value = new Date().getTime();
   });
 };
 </script>
@@ -53,7 +54,7 @@ const handleChange = (info: any) => {
     class="relative"
     @success="handleChange"
   >
-    <Avatar :size="120" :src="avatar" />
+    <Avatar :key="refreshAvatar" :size="120" :src="`${avatar}?time=${refreshAvatar}`" />
     <div
       class="absolute left-[50%-120px] top-[0px] flex h-[120px] w-[120px] cursor-pointer justify-center rounded-full bg-black opacity-0 hover:opacity-30"
     >

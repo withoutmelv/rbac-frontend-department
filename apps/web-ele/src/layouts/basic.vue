@@ -101,7 +101,7 @@ watch(
   <BasicLayout @clear-preferences-and-logout="handleLogout">
     <template #user-dropdown>
       <UserDropdown
-        :avatar
+        :avatar="`${avatar}?time=${new Date().getTime()}`"
         :menus
         :text="userStore.userInfo?.realName"
         :description="userStore.userInfo?.email"
