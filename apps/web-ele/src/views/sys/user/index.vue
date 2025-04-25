@@ -19,6 +19,7 @@ import {
   sysUserPage,
   sysUserRemove,
   unLocked,
+  findUserByRoleIds
 } from '#/api/sys/user';
 import { Icon } from '#/components/icon';
 import { TableAction } from '#/components/table-action';
@@ -38,6 +39,8 @@ const detailFormRef = ref();
 const grantRoleRef = ref();
 const refreshKey= ref(new Date().getTime());
 const currentFormValues = ref({}); // 存储当前表单的值
+const firstLoad = ref(true);
+const sameRoleUserList = ref([]);
 
 const formOptions: VbenFormProps = {
   ...searchFormSchemas,
@@ -51,6 +54,12 @@ const formOptions: VbenFormProps = {
     (gridApi as any).reloadTable();
   }
 };
+
+const getSameRoleUserList = async (params: any) => {
+  firstLoad.value = false;
+  const res = await findUserByRoleIds(params);
+  sameRoleUserList.value = res.map((item: {id: string}) => item.id);
+}
 
 const gridOptions: VxeGridProps<any> = {
   ...gridSchemas,
@@ -73,10 +82,14 @@ const gridOptions: VxeGridProps<any> = {
       query: async ({ page }) => {
         gridApi.formApi.setValues(currentFormValues.value)
         const formValues = currentFormValues.value;
+        firstLoad.value && await getSameRoleUserList({
+          roleIds: userStore.userInfo?.roleIds,
+        });
         return await sysUserPage({
           pageNum: page.currentPage,
           pageSize: page.pageSize,
           deptId: userStore.userInfo?.deptId,
+          ids: sameRoleUserList.value,
           ...formValues,
         });
       },
@@ -278,15 +291,15 @@ const handleDelete = (row: any) => {
             },
           ]"
           :drop-down-actions="[
-            {
-              label: '扮演用户',
-              icon: 'VideoPlay',
-              auth: ['admin', 'sys:playUser'],
-              popConfirm: {
-                title: `是否扮演该用户？`,
-                confirm: handlePlayUser.bind(null, row),
-              },
-            },
+            // {
+            //   label: '扮演用户',
+            //   icon: 'VideoPlay',
+            //   auth: ['admin', 'sys:playUser'],
+            //   popConfirm: {
+            //     title: `是否扮演该用户？`,
+            //     confirm: handlePlayUser.bind(null, row),
+            //   },
+            // },
             {
               label: '重置密码',
               icon: 'Setting',

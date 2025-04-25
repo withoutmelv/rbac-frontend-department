@@ -113,3 +113,7 @@ export async function onlineDevice(data: any) {
 export async function kickoutByTokenValue(data: any) {
   return requestClient.post('/sys/user/kickoutByTokenValue', data);
 }
+
+export async function findUserByRoleIds(data: any) {
+  return requestClient.post('/sys/user/findUserByRoleIds', data);
+}

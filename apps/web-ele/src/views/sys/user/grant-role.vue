@@ -15,8 +15,10 @@ const record = ref();
 const gridApi = ref();
 const userStore = useUserStore();
 const deptId = ref(undefined);
+const roleIds = ref([]);
 if (!userStore.isAdmin) {
-  deptId.value = userStore.userInfo.deptId;
+  deptId.value = userStore.userInfo?.deptId;
+  roleIds.value = userStore.userInfo?.roleIds;
 }
 const formSchamas: VbenFormProps = {
   schema: [
@@ -40,6 +42,7 @@ const formSchamas: VbenFormProps = {
         api: '/sys/role/select',
         multiple: true,
         params: {
+          ids: roleIds.value,
           deptId: deptId.value,
           includeType: 1,
           pageNum: 1,

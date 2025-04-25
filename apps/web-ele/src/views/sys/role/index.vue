@@ -70,6 +70,7 @@ const gridOptions: VxeGridProps<any> = {
           pageNum: page.currentPage,
           pageSize: page.pageSize,
           deptId: userStore.userInfo?.deptId,
+          ids: userStore.userInfo?.roleIds,
           ...formValues,
         });
       },

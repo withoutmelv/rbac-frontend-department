@@ -298,19 +298,19 @@ export const formSchamas: VbenFormProps = {
       rules: 'selectRequired',
       detailSpan: 6,
     },
-    {
-      fieldName: 'postId',
-      label: '所属岗位',
-      component: 'ApiSelect',
-      componentProps: {
-        placeholder: '请选择所属岗位',
-        allowClear: true,
-        api: '/sys/post/select',
-      },
-      formItemClass: 'col-span-6',
-      rules: 'selectRequired',
-      detailSpan: 6,
-    },
+    // {
+    //   fieldName: 'postId',
+    //   label: '所属岗位',
+    //   component: 'ApiSelect',
+    //   componentProps: {
+    //     placeholder: '请选择所属岗位',
+    //     allowClear: true,
+    //     api: '/sys/post/select',
+    //   },
+    //   formItemClass: 'col-span-6',
+    //   rules: 'selectRequired',
+    //   detailSpan: 6,
+    // },
     {
       fieldName: 'tel',
       label: '联系电话',

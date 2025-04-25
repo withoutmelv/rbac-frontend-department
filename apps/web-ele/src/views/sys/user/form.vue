@@ -46,7 +46,7 @@ const [Modal, modalApi] = useVbenModal({
         formApi.updateSchema([
           {
             fieldName: 'deptId',
-            defaultValue: userStore.userInfo.deptId,
+            defaultValue: userStore.userInfo?.deptId,
             componentProps: {
               disabled: true,
             },
@@ -62,7 +62,7 @@ const [Modal, modalApi] = useVbenModal({
         const values = await formApi.getValues();
         modalApi.setState({ loading: true, confirmLoading: true });
         const submitApi = isUpdate.value ? sysUserUpdate : sysUserSave;
-        submitApi(values)
+        submitApi({...values, postId: import.meta.env.VITE_POST_ID})
           .then(() => {
             message.success('保存成功');
             gridApi.value?.reloadTable();

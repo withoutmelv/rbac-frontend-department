@@ -121,18 +121,18 @@ export const formSchamas: VbenFormProps = {
       rules: 'required',
       detailSpan: 12,
     },
-    {
-      fieldName: 'roleType',
-      label: '角色类型',
-      component: 'ApiDict',
-      componentProps: {
-        placeholder: '请选择角色类型',
-        allowClear: true,
-        code: 'sys_role_role_type',
-      },
-      formItemClass: 'col-span-12',
-      detailSpan: 12,
-    },
+    // {
+    //   fieldName: 'roleType',
+    //   label: '角色类型',
+    //   component: 'ApiDict',
+    //   componentProps: {
+    //     placeholder: '请选择角色类型',
+    //     allowClear: true,
+    //     code: 'sys_role_role_type',
+    //   },
+    //   formItemClass: 'col-span-12',
+    //   detailSpan: 12,
+    // },
     {
       fieldName: 'enabled',
       label: '是否启用',

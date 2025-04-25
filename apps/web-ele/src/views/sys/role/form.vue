@@ -61,7 +61,7 @@ const [Modal, modalApi] = useVbenModal({
         const values = await formApi.getValues();
         modalApi.setState({ loading: true, confirmLoading: true });
         const submitApi = record.value?.id ? sysRoleUpdate : sysRoleSave;
-        submitApi(values)
+        submitApi({...values, roleType: import.meta.env.VITE_ROLE_TYPE})
           .then(() => {
             message.success('保存成功');
             gridApi.value?.reloadTable();
