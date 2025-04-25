@@ -287,6 +287,7 @@ export const formSchamas: VbenFormProps = {
       fieldName: 'deptId',
       label: '所属部门',
       component: 'ApiTreeSelect',
+      defaultValue: '-',
       componentProps: {
         placeholder: '请选择所属部门',
         allowClear: true,
@@ -322,15 +323,15 @@ export const formSchamas: VbenFormProps = {
       formItemClass: 'col-span-12',
       detailSpan: 12,
     },
-    {
-      fieldName: 'avatar',
-      label: '头像',
-      component: 'Avatar',
-      componentProps: {
-        placeholder: '请选择头像',
-      },
-      formItemClass: 'col-span-12',
-    },
+    // {
+    //   fieldName: 'avatar',
+    //   label: '头像',
+    //   component: 'Avatar',
+    //   componentProps: {
+    //     placeholder: '请选择头像',
+    //   },
+    //   formItemClass: 'col-span-12',
+    // },
     {
       fieldName: 'remark',
       label: '备注',

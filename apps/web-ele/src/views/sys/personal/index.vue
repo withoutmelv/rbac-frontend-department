@@ -113,7 +113,7 @@ const handleChange = (key: any) => {
     <div class="grid grid-cols-3 gap-4">
       <Card class="col-span-1">
         <div class="flex justify-center">
-          <UpdateAvatar :avatar="userStore.userInfo?.avatar" />
+          <!-- <UpdateAvatar :avatar="userStore.userInfo?.avatar" /> -->
         </div>
         <div class="flex justify-center p-[8px]">
           {{ userStore.userInfo?.realName }}
