@@ -16,7 +16,7 @@ import {
 
 import { Description } from '#/components/description';
 
-import OnlineDevice from './online-device.vue';
+// import OnlineDevice from './online-device.vue';
 import UpdateAvatar from './update-avatar.vue';
 import UpdateInfo from './update-info.vue';
 import UpdatePassword from './update-password.vue';
@@ -132,9 +132,9 @@ const handleChange = (key: any) => {
           <TabPane label="修改密码" name="2">
             <UpdatePassword ref="updatePasswordRef" />
           </TabPane>
-          <TabPane label="在线设备" name="3">
+          <!-- <TabPane label="在线设备" name="3">
             <OnlineDevice />
-          </TabPane>
+          </TabPane> -->
         </Tabs>
       </Card>
     </div>
