@@ -9,6 +9,8 @@ import '@vben/styles';
 import '@vben/styles/ele';
 
 import { useTitle } from '@vueuse/core';
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import { ElLoading } from 'element-plus';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -32,6 +34,7 @@ async function bootstrap(namespace: string) {
   // });
   const app = createApp(App);
 
+  app.use(ElementPlus);
   // 注册Element Plus提供的v-loading指令
   app.directive('loading', ElLoading.directive);
 
