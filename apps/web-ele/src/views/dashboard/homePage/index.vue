@@ -30,7 +30,7 @@
       </div>
     </div>
   
-    <el-dialog
+    <ElDialog
       v-model="dialogVisible"
       title="知识库选择"
       width="80%"
@@ -51,7 +51,7 @@
           <!-- <el-button type="primary" size="small" @click="selectLibrary(lib)">选择</el-button> -->
         </div>
       </div>
-    </el-dialog>
+    </ElDialog>
   </div>
   
 </template>
@@ -59,6 +59,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { ElDialog } from 'element-plus';
 
 import { sysfindKnowledgeByRoleId } from '#/api/sys/role-knowledge';
 import { sysKnowledgePage } from '#/api/sys/knowledge';
